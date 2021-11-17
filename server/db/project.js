@@ -24,7 +24,7 @@ const Project = db.define('Project', {
     defaultValue: false,
   },
   description: {
-    type: Sequelize.TEXT('big'),
+    type: Sequelize.TEXT,
   },
 });
 

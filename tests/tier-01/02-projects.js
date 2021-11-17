@@ -254,7 +254,7 @@ describe('Tier One: Projects', () => {
     });
   });
 
-  describe.only('Sequelize Model', () => {
+  describe('Sequelize Model', () => {
     let project;
     const fakeDeadline = new Date(2020, 12, 31);
     before(() => db.sync({ force: true }));
@@ -339,7 +339,7 @@ describe('Tier One: Projects', () => {
     });
   });
 
-  describe('Seed File', () => {
+  describe.only('Seed File', () => {
     // Once you've set up the Project Sequelize model, it's a good time to seed
     // the database with some dummy data. Go edit seed.js. Note that the tests
     // run the seed file on the TEST database. When you're ready to interact
@@ -347,7 +347,7 @@ describe('Tier One: Projects', () => {
     // command line.
     beforeEach(seed);
 
-    xit('populates the database with at least three projects', async () => {
+    it('populates the database with at least three projects', async () => {
       const seedProjects = await Project.findAll();
       expect(seedProjects).to.have.lengthOf.at.least(3);
     });
