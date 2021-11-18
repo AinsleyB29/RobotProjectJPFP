@@ -51,7 +51,7 @@ describe('Tier One: Robots', () => {
     mockAxios.onGet('/api/robots').replyOnce(200, robots);
   });
 
-  describe('<AllRobots /> component', () => {
+  describe.only('<AllRobots /> component', () => {
     const getRobotsSpy = sinon.spy();
     afterEach(() => {
       getRobotsSpy.resetHistory();
@@ -59,7 +59,7 @@ describe('Tier One: Robots', () => {
 
     // This test is interested in the unconnected AllRobots component. It is
     // exported as a named export in app/components/AllRobots.js
-    xit('renders the robots passed in as props', () => {
+    it('renders the robots passed in as props', () => {
       const wrapper = mount(
         <UnconnectedAllRobots robots={robots} getRobots={getRobotsSpy} />
       );
@@ -74,7 +74,7 @@ describe('Tier One: Robots', () => {
       ]);
     });
 
-    xit('renders DIFFERENT robots passed in as props', () => {
+    it('renders DIFFERENT robots passed in as props', () => {
       const differentRobots = [
         {
           id: 3,
@@ -105,14 +105,14 @@ describe('Tier One: Robots', () => {
       ]);
     });
 
-    xit('*** renders "No Robots" if this.props.robots is empty or undefined', () => {
+    it('*** renders "No Robots" if this.props.robots is empty or undefined', () => {
       throw new Error('replace this error with your own test');
     });
 
     // In a later step, we'll create a thunk, and map that thunk to AllRobots
     // as getRobots. For right now, we just need to be sure the component
     // calls it after it mounts.
-    xit('calls this.props.getRobots after mount', async () => {
+    it('calls this.props.getRobots after mount', async () => {
       mount(<UnconnectedAllRobots robots={robots} getRobots={getRobotsSpy} />);
       await waitForExpect(() => {
         expect(getRobotsSpy).to.have.been.called;
