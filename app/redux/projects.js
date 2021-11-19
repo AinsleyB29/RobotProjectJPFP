@@ -1,35 +1,33 @@
 import axios from 'axios';
-import { agent } from 'superagent';
+
+export const SET_PROJECTS = 'SET_PROJECTS';
 
 export const setProjects = (projects) => {
   return {
-    type: 'SET_PROJECTS',
+    type: SET_PROJECTS,
     projects,
   };
 };
 
-export function createSetProjectsError(error) {
-  return { type: 'SET_PROJECTS_ERROR', error };
-}
-
 export const fetchProjectsThunk = () => {
   return async (dispatch) => {
     try {
-      const { data } = await axios.get('/projects');
+      const { data } = await axios.get('/api/projects');
       dispatch(setProjects(data));
     } catch (error) {
-      dispatch(createSetProjectsError(error));
+      console.error(error);
     }
   };
 };
 
 // Take a look at app/redux/index.js to see where this reducer is
 // added to the Redux store with combineReducers
-export default function projectsReducer(projects = [], action) {
+const initialState = { projects: [] };
+export default function projectsReducer(state = initialState, action) {
   switch (action.type) {
-    case 'SET_PROJECTS':
-      return [...projects, action.item];
+    case SET_PROJECTS:
+      return { ...state, projects: action.projects };
     default:
-      return projects;
+      return state;
   }
 }

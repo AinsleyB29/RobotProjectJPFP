@@ -52,7 +52,7 @@ describe('Tier One: Projects', () => {
     mockAxios.onGet('/api/projects').replyOnce(200, projects);
   });
 
-  describe('<AllProjects /> component', () => {
+  describe.only('<AllProjects /> component', () => {
     const getProjectsSpy = sinon.spy();
     afterEach(() => {
       getProjectsSpy.resetHistory();
@@ -60,7 +60,7 @@ describe('Tier One: Projects', () => {
 
     // This test is interested in the unconnected AllProjects component. It is
     // exported as a named export in app/components/AllProjects.js
-    xit('renders the projects passed in as props', () => {
+    it('renders the projects passed in as props', () => {
       const wrapper = mount(
         <UnconnectedAllProjects
           projects={projects}
@@ -72,7 +72,7 @@ describe('Tier One: Projects', () => {
       expect(wrapper.text()).to.include('Open the pod bay doors');
     });
 
-    xit('renders DIFFERENT projects passed in as props', () => {
+    it('renders DIFFERENT projects passed in as props', () => {
       const differentProjects = [
         {
           id: 4,
@@ -93,14 +93,14 @@ describe('Tier One: Projects', () => {
       expect(wrapper.text()).to.include('Shut down all the garbage compactors');
     });
 
-    xit('*** renders "No Projects" if passed an empty array of projects or if projects is undefined', () => {
+    it('*** renders "No Projects" if passed an empty array of projects or if projects is undefined', () => {
       throw new Error('replace this error with your own test');
     });
 
     // In a later step, we'll create a thunk, and map that thunk to AllProjects
     // as getProjects. For right now, we just need to be sure the component
     // calls it after it mounts.
-    xit('calls this.props.getProjects after mount', async () => {
+    it('calls this.props.getProjects after mount', async () => {
       mount(
         <UnconnectedAllProjects
           projects={projects}
@@ -113,20 +113,20 @@ describe('Tier One: Projects', () => {
     });
   });
 
-  describe('Redux', () => {
+  describe.only('Redux', () => {
     let fakeStore;
     beforeEach(() => {
       fakeStore = mockStore(initialState);
     });
     describe('set/fetch projects', () => {
-      xit('setProjects action creator', () => {
+      it('setProjects action creator', () => {
         expect(setProjects(projects)).to.deep.equal({
           type: 'SET_PROJECTS',
           projects,
         });
       });
 
-      xit('fetchProjects thunk creator returns a thunk that GETs /api/projects', async () => {
+      it('fetchProjects thunk creator returns a thunk that GETs /api/projects', async () => {
         await fakeStore.dispatch(fetchProjects());
         const [getRequest] = mockAxios.history.get;
         expect(getRequest).to.not.equal(undefined);
@@ -136,7 +136,7 @@ describe('Tier One: Projects', () => {
         expect(actions[0].projects).to.deep.equal(projects);
       });
     });
-    describe('projects reducer', () => {
+    describe.only('projects reducer', () => {
       // Pay attention to where the store is being created, namely
       // app/redux/index.js. Once you've created your reducer, ensure that
       // it's actually being used by the redux store.
@@ -145,11 +145,11 @@ describe('Tier One: Projects', () => {
         testStore = createStore(appReducer);
       });
 
-      xit('*** returns the initial state by default', () => {
+      it('*** returns the initial state by default', () => {
         throw new Error('replace this error with your own test');
       });
 
-      xit('reduces on SET_PROJECTS action', () => {
+      it('reduces on SET_PROJECTS action', () => {
         const action = { type: 'SET_PROJECTS', projects };
 
         const prevState = testStore.getState();
@@ -166,7 +166,7 @@ describe('Tier One: Projects', () => {
     // This test is expecting your component to dispatch a thunk after it mounts
     // Remember that getProjects prop from an earlier test? Now's a good time
     // for a mapDispatch.
-    xit('initializes projects from the server when the application loads the /projects route', async () => {
+    it('initializes projects from the server when the application loads the /projects route', async () => {
       const reduxStateBeforeMount = store.getState();
       expect(reduxStateBeforeMount.projects).to.deep.equal([]);
       mount(
@@ -184,7 +184,7 @@ describe('Tier One: Projects', () => {
 
     // This test is expecting your component to render the projects from the
     // Redux store. Now's a good time for a mapState.
-    xit('<AllProjects /> renders projects from the Redux store', async () => {
+    it('<AllProjects /> renders projects from the Redux store', async () => {
       const wrapper = mount(
         <Provider store={store}>
           <MemoryRouter initialEntries={['/projects']}>
@@ -215,7 +215,7 @@ describe('Tier One: Projects', () => {
 
     // This test expects that you've set up a Route for AllProjects.
     // You should take a look at app/components/Routes.js
-    xit('renders <AllProjects /> at path /projects', () => {
+    it('renders <AllProjects /> at path /projects', () => {
       const wrapper = mount(
         <Provider store={store}>
           <MemoryRouter initialEntries={['/projects']}>
@@ -227,7 +227,7 @@ describe('Tier One: Projects', () => {
       expect(wrapper.find(AllRobots)).to.have.length(0);
     });
 
-    xit('*** navbar has links to "/projects"', () => {
+    it('*** navbar has links to "/projects"', () => {
       throw new Error('replace this error with your own test');
     });
   });
@@ -247,7 +247,7 @@ describe('Tier One: Projects', () => {
 
     // Consider writing your GET route in server/api/projects.js. And don't
     // forget to apply the express router to your API in server/api/index.js!
-    xit('GET /api/projects responds with all projects', async () => {
+    it('GET /api/projects responds with all projects', async () => {
       const response = await agent.get('/api/projects').expect(200);
       expect(response.body).to.deep.equal(projects);
       expect(Project.findAll.calledOnce).to.be.equal(true);
@@ -339,7 +339,7 @@ describe('Tier One: Projects', () => {
     });
   });
 
-  describe.only('Seed File', () => {
+  describe('Seed File', () => {
     // Once you've set up the Project Sequelize model, it's a good time to seed
     // the database with some dummy data. Go edit seed.js. Note that the tests
     // run the seed file on the TEST database. When you're ready to interact
