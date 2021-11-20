@@ -2,6 +2,8 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
 import AllRobots from './AllRobots';
 import AllProjects from './AllProjects';
+import singleProject from './singleProject';
+import singleRobot from './singleRobot';
 
 function Routes() {
   return (
@@ -21,6 +23,12 @@ function Routes() {
           <Switch>
             <Route exact path="/robots" component={AllRobots} />
             <Route exact path="/projects" component={AllProjects} />
+            <Route
+              exact
+              path="/projects/:projectId"
+              component={singleProject}
+            />
+            <Route exact path="/robots/:robotId" component={singleRobot} />
           </Switch>
         </div>
       </div>

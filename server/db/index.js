@@ -20,3 +20,5 @@ module.exports = {
   Project,
   Robot,
 };
+
+// magic methods

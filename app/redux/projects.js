@@ -15,7 +15,7 @@ export const fetchProjectsThunk = () => {
       const { data } = await axios.get('/api/projects');
       dispatch(setProjects(data));
     } catch (error) {
-      console.error(error);
+      console.error('Unable to retrieve all projects');
     }
   };
 };
