@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { fetchProjectsThunk } from '../redux/projects';
 import { Link } from 'react-router-dom';
+import AddOneProject from '../components/AddOneProject';
 
 // Notice that we're exporting the AllProjects component twice. The named export
 // (below) is not connected to Redux, while the default export (at the very
@@ -25,6 +26,7 @@ export class AllProjects extends React.Component {
             </div>
           ))}
         </div>
+        <AddOneProject />
       </div>
     );
   }
