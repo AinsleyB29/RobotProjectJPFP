@@ -22,7 +22,6 @@ export const fetchSingleRobotThunk = (robotId) => {
   return async (dispatch) => {
     try {
       const { data } = await axios.get(`/api/robots/${robotId}`);
-      console.log('This is the thunk data', data);
       dispatch(getOneRobot(data));
     } catch (error) {
       console.error('Unable to retrieve single robot');
@@ -34,7 +33,6 @@ export const addOneRobotThunk = (robot) => {
   return async (dispatch) => {
     try {
       const { data } = await axios.post(`api/robots/${robot}`);
-      console.log('This is the thunk data', data);
       dispatch(addOneRobot(data));
     } catch (error) {
       console.error('Unable to add single robot');

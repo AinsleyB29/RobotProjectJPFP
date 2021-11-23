@@ -22,7 +22,6 @@ export const fetchSingleProjectThunk = (projectId) => {
   return async (dispatch) => {
     try {
       const { data } = await axios.get(`/api/projects/${projectId}`);
-      console.log('This is the thunk data', data);
       dispatch(getOneProject(data));
     } catch (error) {
       console.error('Unable to retrieve single project');
@@ -34,7 +33,6 @@ export const addOneProjectThunk = (project) => {
   return async (dispatch) => {
     try {
       const { data: created } = await axios.post('/api/projects', project);
-      console.log('This is the thunk data for adding a project', created);
       dispatch(addOneProject(created));
     } catch (error) {
       console.error('Unable to add one project');
