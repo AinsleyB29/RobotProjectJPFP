@@ -54,16 +54,19 @@ const seed = async () => {
   try {
     await db.sync({ force: true });
 
-    await Promise.all(
+    const [robot1, robot2, robot3] = await Promise.all(
       robots.map((robot) => {
         return Robot.create(robot);
       })
     );
-    await Promise.all(
+    const [project1, project2, project3] = await Promise.all(
       projects.map((project) => {
         return Project.create(project);
       })
     );
+    await robot1.setProjects([project1, project2, project3]);
+    await robot2.setProjects([project1, project2, project3]);
+    await robot3.setProjects([project1, project2, project3]);
   } catch (err) {
     console.log(red(err));
   }

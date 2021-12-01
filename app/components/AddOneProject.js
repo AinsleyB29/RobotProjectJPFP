@@ -1,5 +1,5 @@
 import React from 'react';
-import { addOneProjectThunk } from '../redux/singleProject';
+import { addOneProjectThunk } from '../redux/projects';
 import { connect } from 'react-redux';
 
 export class AddOneProject extends React.Component {
@@ -20,6 +20,7 @@ export class AddOneProject extends React.Component {
     this.props.addOneProjectThunk({ ...this.state });
   }
   render() {
+    console.log('this is this.props:', this.props);
     return (
       <div>
         <form onSubmit={this.handleSubmit}>
@@ -32,6 +33,14 @@ export class AddOneProject extends React.Component {
   }
 }
 
-const mapDispatchToProps = { addOneProjectThunk: addOneProjectThunk };
+const mapDispatch = (dispatch, { history }) => {
+  return {
+    addOneProjectThunk: (project) => {
+      dispatch(addOneProjectThunk(project, history));
+    },
+  };
+};
 
-export default connect(null, mapDispatchToProps)(AddOneProject);
+// const mapDispatchToProps = { addOneProjectThunk: addOneProjectThunk };
+
+export default connect(null, mapDispatch)(AddOneProject);

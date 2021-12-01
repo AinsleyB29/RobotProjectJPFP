@@ -12,6 +12,7 @@ router.get('/', async (req, res, next) => {
 
 router.get('/:projectId', async (req, res, next) => {
   try {
+    console.log('this is req.params', req.params);
     const project = await projects.findByPk(req.params.projectId, {
       include: [robots],
     });

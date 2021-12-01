@@ -13,27 +13,35 @@ export class AllProjects extends React.Component {
   }
 
   render() {
+    console.log('this is this.props inside of AllProjects:', this.props);
     return (
       <div>
         <h2>Projects</h2>
         <div>
-          {this.props.projects.map((project) => (
-            <div key={project.id}>
-              <Link to={`/projects/${project.id}`}>
-                <p>{project.title}</p>
-                <p>{project.deadline}</p>
-              </Link>
-            </div>
-          ))}
+          {this.props.projects.map(
+            // eslint-disable-next-line no-confusing-arrow
+            (project) =>
+              project ? (
+                <div key={project.id}>
+                  <Link to={`/projects/${project.id}`}>
+                    <p>{project.title}</p>
+                    <p>{project.deadline}</p>
+                  </Link>
+                </div>
+              ) : (
+                ''
+              )
+            // eslint-disable-next-line function-paren-newline
+          )}
         </div>
-        <AddOneProject />
+        <AddOneProject {...this.props} />
       </div>
     );
   }
 }
 
 const mapState = (state) => {
-  return state.projects;
+  return { projects: state.projects };
 };
 
 const mapDispatch = (dispatch) => {

@@ -30,7 +30,6 @@ function Routes() {
               component={singleProject}
             />
             <Route exact path="/robots/:robotId" component={singleRobot} />
-            <Route exact path="/projects" component={AddOneProject} />
           </Switch>
         </div>
       </div>
