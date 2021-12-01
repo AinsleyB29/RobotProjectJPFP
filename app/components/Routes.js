@@ -4,7 +4,6 @@ import AllRobots from './AllRobots';
 import AllProjects from './AllProjects';
 import singleProject from './singleProject';
 import singleRobot from './singleRobot';
-import AddOneProject from './AddOneProject';
 
 function Routes() {
   return (
