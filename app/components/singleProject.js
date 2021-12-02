@@ -18,8 +18,12 @@ export class singleProject extends React.Component {
           <p>{this.props.project.description}</p>
         </div>
         <h1>Robots</h1>
-        {this.props.project.Robots.map((robot) =>
-          robot ? <p key={robot.id}>{robot.name}</p> : ''
+        {this.props.project.Robots && this.props.project.Robots.length > 0 ? (
+          this.props.project.Robots.map((robot) => (
+            <p key={robot.id}>{robot.name}</p>
+          ))
+        ) : (
+          <p>'Damn, where ya robots at?'</p>
         )}
       </div>
     );
