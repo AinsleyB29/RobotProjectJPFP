@@ -13,6 +13,7 @@ export class AddOneRobot extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
   handleChange(event) {
+    event.preventDefault();
     this.setState({ [event.target.name]: event.target.value });
   }
   handleSubmit(event) {
@@ -20,20 +21,27 @@ export class AddOneRobot extends React.Component {
     this.props.addOneRobotThunk({ ...this.state });
   }
   render() {
-    const { name } = this.state;
-    const { handleSubmit, handleChange } = this;
+    // const { name } = this.state;
+    // const { handleSubmit, handleChange } = this.state;
     return (
       <div>
         <h1>Add A New Robot</h1>
-        <form id="add-form" onSubmit={handleSubmit}>
+        <form id="add-form" onSubmit={this.handleSubmit}>
           <label htmlFor="name">Robot Name</label>
           <input
             name="name"
             required={true}
-            value={name}
-            onChange={handleChange}
+            value={this.state.name}
+            onChange={this.handleChange}
           />
-          <button type="submit" disabled={!name} id="addButton">
+          <label htmlFor="fuel-type">Fuel Type:</label>
+
+          <select name="fuel-type" id="fuel-type">
+            <option value="electric">Electric</option>
+            <option value="gas">Gas</option>
+            <option value="diesel">Diesel</option>
+          </select>
+          <button type="submit" disabled={!this.state.name} id="addButton">
             Add Robot
           </button>
         </form>

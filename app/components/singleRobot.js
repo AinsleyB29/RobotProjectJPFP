@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { fetchSingleRobotThunk } from '../redux/singleRobot';
+import { Link } from 'react-router-dom';
 
 export class singleRobot extends React.Component {
   componentDidMount() {
@@ -8,6 +9,10 @@ export class singleRobot extends React.Component {
   }
 
   render() {
+    console.log(
+      'these are the props for robot.projects',
+      this.props.robot.Projects
+    );
     return (
       <div>
         <h1>Robot</h1>
@@ -17,13 +22,25 @@ export class singleRobot extends React.Component {
           <p>{this.props.robot.fuelType}</p>
           <p>{this.props.robot.fuelLevel}</p>
         </div>
+        <h1>Projects</h1>
+        {this.props.robot.Projects && this.props.robot.Projects.length > 0 ? (
+          this.props.robot.Projects.map((project) => (
+            <div key={project.id}>
+              <Link to={`/projects/${project.id}`}>
+                <p>{project.title}</p>
+              </Link>
+            </div>
+          ))
+        ) : (
+          <p>'No projects huh :/'</p>
+        )}
       </div>
     );
   }
 }
 
 const mapState = (state) => {
-  return state.robot;
+  return { robot: state.robot };
 };
 
 const mapDispatch = (dispatch) => {

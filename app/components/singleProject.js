@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { fetchSingleProjectThunk } from '../redux/singleProject';
+import { Link } from 'react-router-dom';
 
 export class singleProject extends React.Component {
   componentDidMount() {
@@ -20,7 +21,11 @@ export class singleProject extends React.Component {
         <h1>Robots</h1>
         {this.props.project.Robots && this.props.project.Robots.length > 0 ? (
           this.props.project.Robots.map((robot) => (
-            <p key={robot.id}>{robot.name}</p>
+            <div key={robot.id}>
+              <Link to={`/robots/${robot.id}`}>
+                <p>{robot.name}</p>
+              </Link>
+            </div>
           ))
         ) : (
           <p>'Damn, where ya robots at?'</p>
