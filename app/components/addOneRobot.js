@@ -7,13 +7,15 @@ export class AddOneRobot extends React.Component {
     super();
     this.state = {
       name: '',
+      imageUrl: '',
     };
 
-    this.handleChange = this.handleChange.bind(this);
+    // this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
   handleChange(event) {
     event.preventDefault();
+    console.log("This is the event target's value", event.target);
     this.setState({ [event.target.name]: event.target.value });
   }
   handleSubmit(event) {
@@ -32,7 +34,14 @@ export class AddOneRobot extends React.Component {
             name="name"
             required={true}
             value={this.state.name}
-            onChange={this.handleChange}
+            onChange={this.handleChange.bind(this)}
+          />
+          <label htmlFor="image-url">Image Url</label>
+          <input
+            name="imageUrl"
+            required={true}
+            value={this.state.imageUrl}
+            onChange={this.handleChange.bind(this)}
           />
           <label htmlFor="fuel-type">Fuel Type:</label>
 
